@@ -5,8 +5,8 @@ import "package:ed25519_hd_key/ed25519_hd_key.dart";
 import "package:hex/hex.dart";
 
 void main() {
-  Map<String, dynamic> vectors =
-      json.decode(File('./test/test_vectors.json').readAsStringSync(encoding: utf8));
+  Map<String, dynamic> vectors = json.decode(
+      File('./test/test_vectors.json').readAsStringSync(encoding: utf8));
   final seeds = vectors.keys;
 
   group("Test vectors for ${seeds.first} seed", () {
