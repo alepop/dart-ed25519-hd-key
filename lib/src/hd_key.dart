@@ -16,7 +16,9 @@ class _ED25519HD {
 
   const _ED25519HD();
 
-  KeyData derivePath(String path, Uint8List seedBytes) {
+  KeyData derivePath(String path, Uint8List seedBytes,
+      {int offset = HARDENED_OFFSET}) {
+
     if (!_ED25519HD._pathRegex.hasMatch(path)) {
       throw ArgumentError(
           "Invalid derivation path. Expected BIP32 path format");
@@ -28,7 +30,7 @@ class _ED25519HD {
 
     return segments.fold<KeyData>(master, (prevKeyData, indexStr) {
       int index = int.parse(indexStr.substring(0, indexStr.length - 1));
-      return _getCKDPriv(prevKeyData, index + HARDENED_OFFSET);
+      return _getCKDPriv(prevKeyData, index + offset);
     });
   }
 
