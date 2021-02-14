@@ -1,9 +1,8 @@
 name: ed25519_hd_key
-version: 1.0.1
+version: 1.1.0
 
 description: BIP-0032 like derivation for ed25519 curve
-author: Aleksey Popov <alepooop@gmail.com>
-homepage: https://github.com/alepop/dart-ed25519-hd-key
+repository: https://github.com/alepop/dart-ed25519-hd-key
 
 environment:
   sdk: '>=2.0.0 <3.0.0'
