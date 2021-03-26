@@ -1,15 +1,15 @@
 name: ed25519_hd_key
-version: 1.1.0
+version: 2.0.0
 
 description: BIP-0032 like derivation for ed25519 curve
 repository: https://github.com/alepop/dart-ed25519-hd-key
 
 environment:
-  sdk: '>=2.0.0 <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
-  cryptography: ^1.4.0
+  cryptography: ^2.0.1
 
 dev_dependencies:
-  test: ^1.0.0
-  convert: ^2.1.1
+  test: ^1.16.8
+  convert: ^3.0.0
