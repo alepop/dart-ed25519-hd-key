@@ -10,8 +10,9 @@ void main() {
   final seeds = vectors.keys;
 
   group("Test vectors for ${seeds.first} seed", () {
-    test("should have valid key and chainCode", () {
-      var master = ED25519_HD_KEY.getMasterKeyFromSeed(hex.decode(seeds.first));
+    test("should have valid key and chainCode", () async {
+      var master =
+          await ED25519_HD_KEY.getMasterKeyFromSeed(hex.decode(seeds.first));
       expect(
           hex.encode(master.key),
           equals(
@@ -22,10 +23,10 @@ void main() {
               "90046a93de5380a72b5e45010748567d5ea02bbf6522f979e05c0d8d8ca9fffb"));
     });
     for (var el in vectors[seeds.first]) {
-      test("should calculate valid data for '${el['path']}' path", () {
-        KeyData data =
-            ED25519_HD_KEY.derivePath(el['path'], hex.decode(seeds.first));
-        var pb = ED25519_HD_KEY.getPublicKey(data.key);
+      test("should calculate valid data for '${el['path']}' path", () async {
+        KeyData data = await ED25519_HD_KEY.derivePath(
+            el['path'], hex.decode(seeds.first));
+        var pb = await ED25519_HD_KEY.getPublicKey(data.key);
         expect({
           "path": el['path'],
           "chainCode": hex.encode(data.chainCode),
@@ -37,8 +38,9 @@ void main() {
   });
 
   group("Test vectors for ${seeds.last} seed", () {
-    test("should have valid key and chainCode", () {
-      var master = ED25519_HD_KEY.getMasterKeyFromSeed(hex.decode(seeds.last));
+    test("should have valid key and chainCode", () async {
+      var master =
+          await ED25519_HD_KEY.getMasterKeyFromSeed(hex.decode(seeds.last));
       expect(
           hex.encode(master.key),
           equals(
@@ -49,9 +51,10 @@ void main() {
               "ef70a74db9c3a5af931b5fe73ed8e1a53464133654fd55e7a66f8570b8e33c3b"));
     });
     for (var el in vectors[seeds.last]) {
-      test("should calculate valid data for '${el['path']}' path", () {
-        KeyData data = ED25519_HD_KEY.derivePath(el['path'], hex.decode(seeds.last));
-        var pb = ED25519_HD_KEY.getPublicKey(data.key);
+      test("should calculate valid data for '${el['path']}' path", () async {
+        KeyData data =
+            await ED25519_HD_KEY.derivePath(el['path'], hex.decode(seeds.last));
+        var pb = await ED25519_HD_KEY.getPublicKey(data.key);
         expect({
           "path": el['path'],
           "chainCode": hex.encode(data.chainCode),
