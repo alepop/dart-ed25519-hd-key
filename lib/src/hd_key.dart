@@ -11,7 +11,6 @@ const ED25519_HD_KEY = _ED25519HD();
 
 /// Implementation of ED25519 private key derivation from master private key
 class _ED25519HD {
-  static final _curveBytes = utf8.encode(ED25519_CURVE);
   static final _pathRegex = RegExp(r"^(m\/)?(\d+'?\/)*\d+'?$");
 
   const _ED25519HD();
@@ -38,8 +37,9 @@ class _ED25519HD {
     return result;
   }
 
-  Future<KeyData> getMasterKeyFromSeed(List<int> seedBytes) =>
-      _getKeys(seedBytes, _ED25519HD._curveBytes);
+  Future<KeyData> getMasterKeyFromSeed(List<int> seedBytes,
+          {String masterSecret = ED25519_CURVE}) =>
+      _getKeys(seedBytes, utf8.encode(masterSecret));
 
   Future<List<int>> getPublicKey(List<int> privateKey,
       [bool withZeroByte = true]) async {
