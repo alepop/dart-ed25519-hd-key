@@ -1,6 +1,11 @@
 # Changelog
 
+## 2.1.0 (2021-05-06)
+
+- Added master secret as optional parameter
+
 ## 2.0.0 (2021-03-27)
+
 - migrate to null safety
 
 ## 1.1.0 (2021-02-14)
