@@ -64,4 +64,20 @@ void main() {
       });
     }
   });
+
+  group("Test optional master key change", () {
+    const masterSecret = "Bitcoin seed";
+
+    test("Using '$masterSecret' key", () async {
+      var master = await ED25519_HD_KEY.getMasterKeyFromSeed(
+          hex.decode(
+              "cd7875cc62c027a41e030f484fb17afe9737d0eb904f7642fc1a921d5ef94344461418dd53376ea31983a29ec119b209b844fe70f6e6c86673ce2a414236a198"),
+          masterSecret: masterSecret);
+
+      expect(
+          hex.encode(master.key),
+          equals(
+              "1352d9efc5c511f89ff262f913e58a2d42649d47246752790cbce6987e100bfe"));
+    });
+  });
 }
