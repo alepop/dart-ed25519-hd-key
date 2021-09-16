@@ -1,5 +1,5 @@
 name: ed25519_hd_key
-version: 2.1.0
+version: 2.2.0
 
 description: BIP-0032 like derivation for ed25519 curve
 repository: https://github.com/alepop/dart-ed25519-hd-key
