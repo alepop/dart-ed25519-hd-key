@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:cryptography/cryptography.dart';
+import 'package:crypto/crypto.dart';
+import 'package:pinenacl/ed25519.dart';
 
 import 'constants.dart';
 import 'key_data.dart';
@@ -43,17 +44,16 @@ class _ED25519HD {
 
   Future<List<int>> getPublicKey(List<int> privateKey,
       [bool withZeroByte = true]) async {
-    final algorithm = Ed25519();
-    final signature = await algorithm.newKeyPairFromSeed(privateKey);
-    final publicKey = await signature.extractPublicKey();
+    final signature = await SigningKey.fromSeed(Uint8List.fromList(privateKey));
+    final publicKey = await signature.publicKey;
 
     if (withZeroByte == true) {
       List<int> dataBytes = List.filled(33, 0);
       dataBytes[0] = 0x00;
-      dataBytes.setRange(1, 33, publicKey.bytes);
+      dataBytes.setRange(1, 33, publicKey);
       return dataBytes;
     } else {
-      return publicKey.bytes;
+      return publicKey;
     }
   }
 
@@ -66,13 +66,8 @@ class _ED25519HD {
   }
 
   Future<KeyData> _getKeys(List<int> data, List<int> keyParameter) async {
-    final hmac = Hmac.sha512();
-    final sink = await hmac.newMacSink(secretKey: SecretKey(keyParameter));
-    sink
-      ..add(data)
-      ..close();
-
-    final mac = await sink.mac();
+    final hmac = Hmac(sha512, keyParameter);
+    final mac = await hmac.convert(data);
 
     final I = mac.bytes;
     final IL = I.sublist(0, 32);
