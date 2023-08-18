@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.1 (2022-08-18)
+
+- Update dependencies
+
 ## 2.2.0 (2021-09-16)
 
 - Web support
