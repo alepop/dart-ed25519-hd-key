@@ -11,7 +11,7 @@ Usage
 -----
 
 ```dart
-import "package:ed25519_hd_key/ed25519_hd_key.dart";
+import 'package:ed25519_hd_key/ed25519_hd_key.dart';
 import 'package:convert/convert.dart';
 
 void main() async {
